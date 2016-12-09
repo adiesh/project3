@@ -93,7 +93,7 @@ class StartPage(tk.Frame):
             #.mixer.music.play()
 
         def Happy():
-            print("Prepare to for an uplifting happy tune.")
+            print("Prepare for an uplifting happy tune.")
             pygame.mixer.music.load("Curtis Mayfield - Move On Up.wav")
 
         def Blues():
