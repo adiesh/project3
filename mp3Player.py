@@ -8,6 +8,7 @@ import pygame
 import sys
 from pygame.locals import *
 
+
 import os, shutil
 
 LARGE_FONT = ("Verdana", 12)
@@ -56,26 +57,52 @@ class StartPage(tk.Frame):
             pg.configure( mode='determinate', value = pygame.mixer.music.get_pos())
 
 
+        def Resume():
+            print("resume")
+            pygame.mixer.music.unpause()
+            pg.unpause()
+            #pg.configure( mode='determinate', value = pygame.mixer.music.get_pos())
 
 
         def Pause():
-            print("Pause")
+            print("pause")
             pygame.mixer.music.pause()
-            pg.stop()
+            #pg.stop()
+            pg.pause()
+
+        def Mute():
+            print("mute")
+            pygame.mixer.music.fadeout(750)
+            #pygame.mixer.music.stop()
+            #pg.stop()
+            #pg.stop()
+            #pygame.mixer.music.set_volume(1)
+
+        def Unmute():
+            print("unmute")
+            #pygame.mixer.music.set_volume(1000)
+            #pygame.mixer.music.unpause()
+            pygame.mixer.music.play()
 
 
 
         def Horror():
             print("Prepare for the horror")
+            pygame.mixer.music.load("Requiem For A Dream Original Song.wav")
+            #.mixer.music.play()
 
         def Happy():
             print("Prepare to for an uplifting happy tune.")
+            pygame.mixer.music.load("Curtis Mayfield - Move On Up.wav")
 
         def Blues():
             print("Prepare for some blues.")
+            pygame.mixer.music.load("Santana - Blues Latino.wav")
 
-        def Emo():
-            print("Prepare for some emo tunes.")
+        def Sad():
+            print("Prepare for a sad song.")
+            pygame.mixer.music.load("Stan [Live].wav")
+
         def Browse():
             global fileLabel
             global x
@@ -99,14 +126,16 @@ class StartPage(tk.Frame):
             print (song)
             pygame.mixer.music.load(filelist[song])
 
+        """
         def slider():
             vol = sliderlength/100
             pygame.mixer.music.set_volume(vol)
+        """
 
 
 
         tk.Frame.__init__(self,parent)
-        labelStartStop = tk.Label(self, text = "Press start to play audio. Press pause to stop audio.", font = LARGE_FONT)
+        labelStartStop = tk.Label(self, text = "Press start to play audio, resume to continue audio, pause to stop audio, and mute to mute audio.", font = LARGE_FONT)
         labelStartStop.place(x = 20, y = 20)
 
         labelList = tk.Label(self, text = "Music Play List: ", font = LARGE_FONT)
@@ -116,7 +145,17 @@ class StartPage(tk.Frame):
         play.place(x = 40, y = 60)
 
         pause = tk.Button(self,text = "Pause", command = Pause)
-        pause.place(x = 160, y = 60)
+        pause.place(x = 200, y = 60)
+
+        resume = tk.Button(self, text = "Resume", command = Resume)
+        resume.place(x = 110, y = 60)
+
+
+        mute =  tk.Button(self, text = "Mute", command = Mute)
+        mute.place(x = 270, y = 60)
+
+        unmute = tk.Button(self, text = "Unmute", command = Unmute)
+        unmute.place(x = 340, y = 60)
 
         pg = ttk.Progressbar(self, orient='horizontal',length=300, mode='determinate' )
         pg.place(x = 40, y = 110)
@@ -137,14 +176,14 @@ class StartPage(tk.Frame):
         blues = tk.Button(self,text = "Blues", command = Blues)
         blues.place(x = 280, y = 190)
 
-        emo = tk.Button(self,text = "Emo", command = Emo)
-        emo.place(x = 400, y = 190)
+        sad = tk.Button(self,text = "Sad", command = Sad)
+        sad.place(x = 400, y = 190)
 
-        label = tk.Label(self,text = "Volume", font = LARGE_FONT)
-        label.place(x = 350, y = 20)
+        #label = tk.Label(self,text = "Volume", font = LARGE_FONT)
+        #label.place(x = 350, y = 20)
 
-        Slider1 = Scale(self, orient = HORIZONTAL, length = 100,width = 10, sliderlength = 10, from_ = 0, to = 100, command = slider)
-        Slider1.place (x = 350, y = 40)
+        #Slider1 = Scale(self, orient = HORIZONTAL, length = 100,width = 10, sliderlength = 10, from_ = 0, to = 100, command = slider)
+        #Slider1.place (x = 350, y = 40)
 
         #pygame.mixer.music.set_volume(set)
 
@@ -191,4 +230,3 @@ class StartPage(tk.Frame):
 app = MP3Player()
 app.geometry("600x400")
 app.mainloop()
-
