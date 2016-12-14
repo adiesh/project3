@@ -74,21 +74,27 @@ class StartPage(tk.Frame):
             pygame.mixer.music.pause()
             pg.stop()
 
+
+        def OK():
+            print("OK")
+            pygame.mixer.music.pause()
+            pg.stop()
+
         def Horror():
             print("Prepare for the horror")
-            # pygame.mixer.music.load("Requiem For A Dream Original Song.wav")
+            pygame.mixer.music.load("Requiem For A Dream Original Song.wav")
 
         def Happy():
             print("Prepare to for an uplifting happy tune.")
-            # pygame.mixer.music.load("Curtis Mayfield - Move On Up.wav")
+            pygame.mixer.music.load("Curtis Mayfield - Move On Up.wav")
 
         def Blues():
             print("Prepare for some blues.")
-            # pygame.mixer.music.load("Santana - Blues Latino.wav")
+            pygame.mixer.music.load("Santana - Blues Latino.wav")
 
         def Sad():
-            print("Prepare for some emo tunes.")
-            # pygame.mixer.music.load("Stan [Live].wav")
+            print("Prepare for a sad song.")
+            pygame.mixer.music.load("Stan [Live].wav")
 
         def Choice(event):
             song = int(entry.get())
@@ -106,6 +112,7 @@ class StartPage(tk.Frame):
                 pygame.mixer.music.pause()
                 fileLabel.append(Label(self,text=i, font=LARGE_FONT))
                 radio.append(Radiobutton(self,value=filelist,variable=song))
+                pygame.mixer.music.load(filelist[song])
 
             #     r = Radiobutton(self,text=filebase,variable=song,value=filelist)
             #     r.bind("<Button-1>",Choice)
@@ -139,7 +146,7 @@ class StartPage(tk.Frame):
             pygame.mixer.music.set_volume(0)
 
         def Unmute():
-           print("mute")
+           print("unmute")
            pygame.mixer.music.set_volume(100)
 
         tk.Frame.__init__(self,parent)
@@ -188,7 +195,7 @@ class StartPage(tk.Frame):
         labelChooses = tk.Label(self,text = "Pick a song: ", font = LARGE_FONT)
         labelChooses.place(x = 30, y = 300)
 
-        ok = tk.Button(self,text = "submit")
+        ok = tk.Button(self,text = "OK")
         ok.bind("<Button-1>",Choice)
         ok.place(x = 30, y = 320)
 
